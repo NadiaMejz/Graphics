@@ -1,0 +1,22 @@
+function setup() {
+  createCanvas(800, 600)
+  noLoop()
+}
+
+function draw() {
+  //noprotect
+  background(0)
+  
+   for (y = 0; y < height; y++) {
+        for (x = 0; x < width; x++) {
+          sum = (x+y) / (width+height) * 255
+          centerX = width/2
+          centerY = height/2
+          dx = x - centerX
+          dy = y - centerY
+          distance = sqrt(dx*dx + dy*dy)
+          set(x, y, color(255-distance, distance, sum))
+        }       
+   }
+  updatePixels()
+}
