@@ -1,0 +1,36 @@
+function preload() {
+  img = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/refs/heads/main/src/skimage/data/astronaut.png");
+}
+
+function setup() {
+  createCanvas(512, 512);
+  
+
+  img_v=createImage(256,256); 
+  
+  img.resize(256,256)  
+  
+  makeV()
+  
+
+  image(img_v, 0, 256)
+  image(img, 256, 256)
+}
+
+function makeV() {
+  img.loadPixels();
+
+  for(x=0;x<img.width;x++)
+    for(y=0;y<img.height;y++) {
+      pos=4*(y*img.width+x);
+      r=img.pixels[pos];
+      g=img.pixels[pos+1];
+      b=img.pixels[pos+2];
+
+      cmax=Math.max(r,g,b);
+      v=cmax;
+
+      img_v.set(x, y, v);
+  }
+  img_v.updatePixels();
+}

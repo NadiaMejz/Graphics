@@ -1,0 +1,33 @@
+function preload() {
+  img = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/refs/heads/main/src/skimage/data/astronaut.png");
+}
+
+function setup() {
+  createCanvas(256, 256);
+  background(0)
+  
+  histogram = new Array(256).fill(0)
+  
+  img.resize(256,256);
+  img.filter('gray');
+  makeHistogram();
+  
+  stroke('pink')
+
+  biggestValue = Math.max(...histogram)
+  lineScale = 8
+  for (i=0; i<histogram.length; i++) {
+    normalizedLineHeight = histogram[i]/biggestValue*height*lineScale
+    line(i,height-normalizedLineHeight, i, height);
+  }
+}
+
+function makeHistogram() {
+  img.loadPixels();
+  for(x=0;x<img.width;x++)
+    for(y=0;y<img.height;y++) {
+      pos=4*(y*img.width+x);
+      r=img.pixels[pos]
+      histogram[r]++
+    }
+}
