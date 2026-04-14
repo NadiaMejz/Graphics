@@ -1,0 +1,46 @@
+function makeIdentity() {
+  return [
+    [1,0,0],
+    [0,1,0],
+    [0,0,1]
+  ]
+}
+
+function makeTranslation(tx, ty) {
+  return [
+    [1,0,tx],
+    [0,1,ty],
+    [0,0,1]
+  ]
+}
+
+function makeScale(sx, sy) {
+  return [
+    [sx,0,0],
+    [0,sy,0],
+    [0,0,1]
+  ]
+}
+
+function makeRotation(degrees) {
+  let theta = degrees * Math.PI /180
+  return [
+    [Math.cos(theta),-Math.sin(theta),0],
+    [Math.sin(theta),Math.cos(theta),0],
+    [0, 0, 1]
+  ]
+}
+
+function makeShear(shx, shy) {
+  return [
+    [1,shx, 0],
+    [shy,1,0],
+    [0,0,1]
+  ]
+}
+
+console.log('jednostkowa:', makeIdentity())
+console.log('przesuniecia:',makeTranslation(10, 20))
+console.log('skalowanie:', makeScale(2, 2))
+console.log('obrot 30:', makeRotation(30))
+console.log('przeksztalcenie pochylenia:', makeShear(1, 0.5))
